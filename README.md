@@ -105,6 +105,14 @@ npm run build
 npm run preview -- --port 4173
 ```
 
-生产产物位于 `dist/`，可发布到支持静态站点的服务。无后端、数据库或环境变量依赖。当前配置面向域名根路径部署；部署到子目录时还需统一处理资源路径和 Vite `base`。
+生产产物位于 `dist/`，可发布到支持静态站点的服务。无后端、数据库或环境变量依赖。
+
+站点已通过 GitHub Actions 自动部署到 GitHub Pages：
+
+- 线上地址：<https://shenjiajun01-dotcom.github.io/liuyumeng-portfolio/>
+- 工作流：`.github/workflows/deploy.yml`
+- 推送到 `main` 分支即触发重新构建与部署，访问地址保持不变。
+
+项目站点位于 `/liuyumeng-portfolio/` 子路径下，因此构建时 Vite `base` 会自动指向该路径（本地开发仍使用根路径），源码中的静态资源地址统一以 `import.meta.env.BASE_URL` 为前缀拼接。
 
 正式公开发布前，请确认愿意公开页面与原始下载文件中的手机号、邮箱、出生年月和照片。联系入口使用系统邮件与电话应用，不会在本站存储访客提交的信息。
