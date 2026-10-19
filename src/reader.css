@@ -1,0 +1,345 @@
+.reader {
+  position: fixed;
+  inset: 0;
+  width: min(1480px, 96vw);
+  height: min(900px, 94dvh);
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #d8ddd5;
+  background: #f6f7f4;
+  color: #242b26;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 30px 100px #17221c40;
+  display: flex;
+  flex-direction: column;
+}
+.reader::backdrop {
+  background: #17221cd9;
+  backdrop-filter: blur(8px);
+}
+.reader-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  min-height: 89px;
+  padding: 19px 28px;
+  border-bottom: 1px solid #d8ddd5;
+  flex-shrink: 0;
+}
+.reader-overline {
+  font-size: 8px;
+  color: #69716b;
+}
+.reader-header h2 {
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 6px;
+}
+.reader-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.close-reader {
+  margin-left: 15px;
+}
+.reader-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 265px;
+  flex: 1;
+  min-height: 0;
+}
+.reader-stage {
+  background: #e6e9e2;
+  overflow: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  min-height: 0;
+  overscroll-behavior: contain;
+}
+.reader-image {
+  display: block;
+  max-width: none;
+  flex-shrink: 0;
+  object-fit: contain;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.reader-image.is-loaded {
+  opacity: 1;
+}
+.reader-stage:not(.is-zoomed) .reader-image {
+  max-height: 100%;
+  object-fit: contain;
+}
+.reader-stage.is-zoomed {
+  display: block;
+}
+.reader-stage.is-zoomed .reader-image {
+  margin: auto;
+}
+.reader-sidebar {
+  padding: 31px 23px;
+  overflow: auto;
+  border-left: 1px solid #d8ddd5;
+}
+.reader-chapter {
+  font-size: 9px;
+  color: #69716b;
+}
+.reader-sidebar h3 {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-top: 18px;
+}
+.reader-subtitle {
+  font-size: 11px;
+  color: #69716b;
+  line-height: 1.8;
+  margin-top: 9px;
+}
+.reader-description {
+  font-size: 11px;
+  line-height: 2.2;
+  color: #69716b;
+  margin-top: 25px;
+}
+.reader-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 23px;
+}
+.reader-tags > span {
+  font-size: 9px;
+  background: #e5ebde;
+  padding: 5px 8px;
+}
+.reader-sidebar dl {
+  font-size: 10px;
+  margin-top: 28px;
+  border-top: 1px solid #d8ddd5;
+  padding-top: 20px;
+}
+.reader-sidebar dl > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+.reader-sidebar dt {
+  color: #69716b;
+}
+.reader-sidebar dd {
+  margin: 0;
+}
+.reader-page-note {
+  display: block;
+  font-size: 9px;
+  color: #69716b;
+  margin-top: 24px;
+}
+.reader-controls {
+  height: 66px;
+  flex-shrink: 0;
+  border-top: 1px solid #d8ddd5;
+  padding: 10px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.reader-pagination,
+.reader-zoom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.reader-zoom > span {
+  font-size: 11px;
+  min-width: 38px;
+  text-align: center;
+}
+.page-select-label select {
+  font-size: 11px;
+  border: none;
+  background: transparent;
+  color: #242b26;
+  padding: 10px;
+  cursor: pointer;
+}
+.image-skeleton {
+  position: absolute;
+  inset: 20px;
+  display: grid;
+  place-items: center;
+  background: #dde2d7;
+  color: #65705e;
+  font-size: 11px;
+  animation: skeleton-fade 1.4s ease-in-out infinite alternate;
+}
+.reader-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+  font-size: 12px;
+}
+.reader-error > a {
+  font-size: 11px;
+  text-decoration: underline;
+}
+.reader-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  background: #f6f7f4f0;
+  font-size: 13px;
+}
+.reader-loading .icon-button {
+  position: absolute;
+  right: 30px;
+  top: 25px;
+}
+@keyframes skeleton-fade {
+  to {
+    opacity: 0.5;
+  }
+}
+@media (max-width: 1000px) {
+  .reader-content {
+    grid-template-columns: minmax(0, 1fr) 220px;
+  }
+  .reader-sidebar {
+    padding: 24px 17px;
+  }
+  .reader-sidebar h3 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .reader {
+    width: 100vw;
+    height: 100dvh;
+    border: 0;
+    border-radius: 0;
+  }
+  .reader-header {
+    min-height: 79px;
+    padding: 15px 17px;
+    gap: 10px;
+  }
+  .reader-header h2 {
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 210px;
+  }
+  .reader-overline {
+    font-size: 7px;
+  }
+  .reader-header-actions {
+    gap: 1px;
+  }
+  .reader-header-actions .icon-button {
+    width: 30px;
+    height: 35px;
+  }
+  .reader-header-actions > a:first-child {
+    display: none;
+  }
+  .close-reader {
+    margin-left: 5px;
+  }
+  .reader-content {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
+  .reader-stage {
+    flex: none;
+    min-height: 38dvh;
+    max-height: 60dvh;
+    padding: 10px;
+    overflow: auto;
+  }
+  .reader-stage.is-zoomed {
+    min-height: 46dvh;
+  }
+  .reader-stage:not(.is-zoomed) .reader-image {
+    max-height: 58dvh;
+  }
+  .reader-sidebar {
+    border-left: 0;
+    border-top: 1px solid #d8ddd5;
+    padding: 21px 23px 28px;
+    overflow: visible;
+  }
+  .reader-sidebar h3 {
+    font-size: 22px;
+    margin-top: 8px;
+  }
+  .reader-subtitle {
+    font-size: 10px;
+    margin-top: 7px;
+  }
+  .reader-description {
+    font-size: 11px;
+    margin-top: 15px;
+    line-height: 2;
+  }
+  .reader-tags {
+    margin-top: 15px;
+  }
+  .reader-sidebar dl {
+    margin-top: 18px;
+    padding-top: 15px;
+    margin-bottom: 0;
+  }
+  .reader-sidebar dl > div {
+    margin-bottom: 9px;
+  }
+  .reader-page-note {
+    margin-top: 15px;
+    font-size: 8px;
+  }
+  .reader-controls {
+    height: 65px;
+    padding: 8px 12px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    gap: 4px;
+  }
+  .reader-pagination,
+  .reader-zoom {
+    gap: 1px;
+  }
+  .reader-controls .icon-button {
+    width: 32px;
+    height: 36px;
+  }
+  .reader-zoom > span {
+    font-size: 10px;
+    min-width: 35px;
+  }
+  .page-select-label select {
+    font-size: 10px;
+    padding: 10px 6px;
+  }
+  .fit-button {
+    display: none;
+  }
+}
